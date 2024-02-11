@@ -6,6 +6,8 @@ use anchor_client::{
 
 use std::ops::Deref;
 
+mod player;
 mod season;
 
+pub use player::*;
 pub use season::*;

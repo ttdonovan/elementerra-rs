@@ -30,6 +30,8 @@ enum Commands {
 
 #[derive(Subcommand)]
 enum Show {
+    /// Print the player (given wallet address).
+    Player { authority: Pubkey },
     /// Print the current season.
     Season,
 }
@@ -72,6 +74,10 @@ fn main() -> anyhow::Result<()> {
 
     match cli.command {
         Commands::Show(show) => match show {
+            Show::Player { authority } => {
+                let player_accounts = derive::player_accounts(&program, &authority)?;
+                dbg!(player_accounts);
+            }
             Show::Season => {
                 let season_accounts = derive::current_season_accounts(&program)?;
                 dbg!(season_accounts);
